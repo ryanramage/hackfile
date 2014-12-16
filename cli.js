@@ -7,4 +7,4 @@ var path = process.argv[2];
 
 var content =fs.readFileSync(path).toString();
 var tree = hackfile(content);
-console.log(JSON.stringify(tree[0]));
+console.log(JSON.stringify(tree, null, 2));

@@ -1,2 +1,9 @@
-import a.c as tom
-import b.dfds as c
+import helper.ds as h
+
+run silent ls al ds cd
+run ps
+run pipeline asdsa
+pipe dat summary
+run ps
+pipe dat details
+pipe 3 dat details
