@@ -10,7 +10,7 @@ stmt ->
   | run     {% id %}
   | pipe    {% id %}
 
-import -> "import" SPACE Path SPACE "as" SPACE Identifier {% function(d){ return  as_object(d[6],d[2]) }  %}
+import -> "import" SPACE Path SPACE "as" SPACE Identifier {% function(d){ return { type: 'import', path: d[2],  var: d[6] }  }%}
 
 run ->
       "run" SPACE "pipeline" SPACE Identifier {% function(d){ return {type: 'pipeline', name: d[4]}  }            %}
