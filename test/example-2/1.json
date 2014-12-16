@@ -1,0 +1,66 @@
+{
+  "imports": {
+    "h": "helper.ds",
+    "j": "helper.j"
+  },
+  "statements": [
+    {
+      "type": "run",
+      "cmd": {
+        "cmd": "ls",
+        "args": [
+          "al",
+          "ds",
+          "cd"
+        ]
+      },
+      "opts": "silent"
+    },
+    {
+      "type": "run",
+      "cmd": {
+        "cmd": "ps",
+        "args": []
+      }
+    },
+    {
+      "type": "pipeline",
+      "name": "asdsa"
+    },
+    {
+      "type": "pipe",
+      "cmd": {
+        "cmd": "dat",
+        "args": [
+          "summary"
+        ]
+      }
+    },
+    {
+      "type": "run",
+      "cmd": {
+        "cmd": "ps",
+        "args": []
+      }
+    },
+    {
+      "type": "pipe",
+      "cmd": {
+        "cmd": "dat",
+        "args": [
+          "details"
+        ]
+      }
+    },
+    {
+      "type": "pipe",
+      "cmd": {
+        "cmd": "dat",
+        "args": [
+          "details"
+        ]
+      },
+      "width": 3
+    }
+  ]
+}

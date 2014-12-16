@@ -7,3 +7,5 @@ pipe dat summary
 run ps
 pipe dat details
 pipe 3 dat details
+
+import helper.j as j

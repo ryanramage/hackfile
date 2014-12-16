@@ -3,22 +3,20 @@ var hackfile = require('../')
 var fs = require('fs')
 
 var read = function(name) {
-  return fs.readFileSync(__dirname+'/fixtures/'+name, 'utf-8')
+  return fs.readFileSync(__dirname+'/example-'+name , 'utf-8')
 }
 
-tape('parses', function(t) {
-  var result = { foo: [ [ 'bar' ], [ 'baz' ] ], lol: [ [ 'lol', 'lol', 'lol' ] ] }
+var asJson = function(name){
+  return require(__dirname+'/example-'+name)
+}
 
-  t.same(hackfile(read('working')), result, 'parses working file')
+tape('parses simple flat file', function(t) {
+
+  var text = read('2/1.ds');
+  var expected = asJson('2/1.json')
+
+  var actual = hackfile(text);
+  t.deepEqual(actual, expected);
   t.end()
 })
 
-tape('bails on invalid file', function(t) {
-  try {
-    hackfile(read('not-working'))
-    t.ok(false, 'should not parse file')
-  } catch (err) {
-    t.ok(err instanceof SyntaxError, 'should fail with a SyntaxError')
-    t.end()
-  }
-})

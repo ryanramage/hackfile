@@ -19,7 +19,7 @@ var hackfile = function(src) {
       if (tree.stmts && tree.stmts.length > 0){
         tree.stmts.forEach(function(stmt){
           if (stmt.type !== 'import') {
-            tree.statements.push(stmt);
+            return tree.statements.push(stmt);
           }
           tree.imports[stmt.var] = stmt.path;
         })
