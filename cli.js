@@ -6,4 +6,9 @@ var hackfile = require('./');
 var path = process.argv[2];
 
 var content =fs.readFileSync(path).toString();
-var tree = hackfile(content);
+try {
+  var tree = hackfile(content);
+  console.log(tree);
+} catch(parseError) {
+    console.log("Error at character " + (++parseError.offset));
+}

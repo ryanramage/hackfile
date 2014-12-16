@@ -79,5 +79,5 @@ commentchars -> "*" [^/]
 
 # some helper things
 @{% var _ = require('lodash'); %}
-@{% var as_object = function(key,val){ var ob = {}; ob[key] = val; return ob; }; %}
+
 

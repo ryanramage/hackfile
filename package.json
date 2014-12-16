@@ -15,6 +15,7 @@
     "url": "https://github.com/mafintosh/hackfile.git"
   },
   "scripts": {
+    "prepublish": "npm run compile",
     "compile": "./node_modules/.bin/nearleyc hackfile.ne > generated/hackfile-grammer.js",
     "test": "./node_modules/.bin/tap test"
   },
