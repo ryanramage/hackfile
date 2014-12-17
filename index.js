@@ -7,7 +7,7 @@ var hackfile = function(src) {
 
   p.feed(src + '\n\n');
   var trees = p.results;
-  if (trees.length > 1) console.log("WARNING: ambiguous parse.")
+  //if (trees.length > 1) console.log("WARNING: ambiguous parse.")
 
   var tree = trees[0];
 

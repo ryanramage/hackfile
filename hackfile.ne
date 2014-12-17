@@ -74,7 +74,7 @@ Number -> [0-9]:+  {% function(d){ return Number(d[0].join('')) } %}
 Identifier  ->  [a-zA-Z_$] [a-zA-Z0-9_$]:* {% function(d){ return d[0] + d[1].join(''); } %}
 
 
-Shell_Atom -> [\S]:+ {% function(d) {   return d[0].join('') } %}
+Shell_Atom -> [^#\s]:+ {% function(d) { return d[0].join('') } %}
 
 EOL ->
     newline
@@ -101,6 +101,7 @@ newline -> comment:? "\n" {% function() {} %}
 comment -> "//" [^\n]:*
         | "/*" commentchars:+ .:? "*/"
         | "#" [^\n]:*
+        | "##" [^\n]:*
 
 commentchars -> "*" [^/]
             | [^*] .

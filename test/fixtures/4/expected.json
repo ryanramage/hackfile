@@ -1,0 +1,19 @@
+{
+  "imports": {},
+  "statements": [
+    {
+      "type": "block",
+      "name": "preview",
+      "stmts": {
+        "type": "run",
+        "cmd": {
+          "cmd": "dat",
+          "args": [
+            "cat",
+            "samples"
+          ]
+        }
+      }
+    }
+  ]
+}
