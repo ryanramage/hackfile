@@ -10,9 +10,7 @@
       "cmd": {
         "cmd": "ls",
         "args": [
-          "al",
-          "ds",
-          "cd"
+          "-al"
         ]
       },
       "opts": "silent"
@@ -62,6 +60,13 @@
         ]
       },
       "width": 13
+    },
+    {
+      "type": "pipe",
+      "cmd": {
+        "cmd": "docker",
+        "args": [ "ubuntu", "./postData.rb" ]
+      }
     }
   ]
 }

@@ -34,8 +34,8 @@ pipe ->
   | "pipe" SPACE cmd               {% function(d){ return {type: 'pipe', cmd: d[2]               }} %}
 
 cmd ->
-    Identifier {% function(d) { return {cmd: d[0], args: []}  } %}
-  | Identifier SPACE args  {%
+    Shell_Atom {% function(d) { return {cmd: d[0], args: []}  } %}
+  | Shell_Atom SPACE args  {%
      function(d){
        if (_.isArray(d[2])) return {cmd: d[0], args: _.flatten(d[2])}
        return {cmd: d[0], args: [d[2]]}
@@ -48,7 +48,7 @@ args ->
   | arg SPACE args {% function(d){  return [d[0],d[2]] } %}
 
 
-arg -> Identifier {% id %}
+arg -> Shell_Atom {% id %}
 
 Path ->
   [a-zA-Z_$] [a-zA-Z0-9_\.$]:* {% function(d){ return d[0] + d[1].join(''); } %}
@@ -57,6 +57,8 @@ Number -> [0-9]:+  {% function(d){ return Number(d[0].join('')) } %}
 
 Identifier  ->  [a-zA-Z_$] [a-zA-Z0-9_$]:* {% function(d){ return d[0] + d[1].join(''); } %}
 
+
+Shell_Atom -> [\S]:+ {% function(d) {   return d[0].join('') } %}
 
 EOS ->
     newline

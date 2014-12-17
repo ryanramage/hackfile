@@ -2,7 +2,7 @@ import helper.ds as h
 
 env APPLE = test
 
-run silent ls al ds cd
+run silent ls -al
 run ps
 run pipeline asdsa
 pipe dat summary
@@ -10,4 +10,5 @@ run ps
 pipe dat details
 pipe 13 dat details
 
+pipe docker ubuntu ./postData.rb
 import helper.j as j
