@@ -4,6 +4,7 @@
     "j": "helper.j"
   },
   "statements": [
+    { "key": "APPLE", "type": "env", "val": "test" },
     {
       "type": "run",
       "cmd": {
@@ -60,7 +61,7 @@
           "details"
         ]
       },
-      "width": 3
+      "width": 13
     }
   ]
 }

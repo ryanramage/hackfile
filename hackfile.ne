@@ -7,10 +7,15 @@ stmts ->
 
 stmt ->
     import  {% id %}
+  | env     {% id %}
   | run     {% id %}
   | pipe    {% id %}
 
 import -> "import" SPACE Path SPACE "as" SPACE Identifier {% function(d){ return { type: 'import', path: d[2],  var: d[6] }  }%}
+
+env ->
+    "env" SPACE Identifier OPT_SPACE "=" OPT_SPACE Identifier {% function(d){ return { type: 'env', key: d[2],  val: d[6] }  }%}
+
 
 run ->
       "run" SPACE "pipeline" SPACE Identifier {% function(d){ return {type: 'pipeline', name: d[4]}  }            %}
@@ -48,7 +53,7 @@ arg -> Identifier {% id %}
 Path ->
   [a-zA-Z_$] [a-zA-Z0-9_\.$]:* {% function(d){ return d[0] + d[1].join(''); } %}
 
-Number -> [0-9]  {% function(d){ return Number(d) } %}
+Number -> [0-9]:+  {% function(d){ return Number(d[0].join('')) } %}
 
 Identifier  ->  [a-zA-Z_$] [a-zA-Z0-9_$]:* {% function(d){ return d[0] + d[1].join(''); } %}
 
@@ -68,6 +73,8 @@ __ -> [\f\r\t\v\u00A0\u2028\u2029 ]
 SPACE ->
     [^\S\n]:+
 
+OPT_SPACE ->
+    [^\S\n]:*
 
 newline -> comment:? "\n" {% function() {} %}
 comment -> "//" [^\n]:*

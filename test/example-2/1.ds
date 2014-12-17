@@ -1,11 +1,13 @@
 import helper.ds as h
 
+env APPLE = test
+
 run silent ls al ds cd
 run ps
 run pipeline asdsa
 pipe dat summary
 run ps
 pipe dat details
-pipe 3 dat details
+pipe 13 dat details
 
 import helper.j as j
