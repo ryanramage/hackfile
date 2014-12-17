@@ -1,0 +1,25 @@
+{
+  "imports": {},
+  "statements": [
+    {
+      "type": "block",
+      "name": "thing",
+      "stmts": [
+        {
+          "type": "run",
+          "cmd": {
+            "cmd": "test",
+            "args": []
+          }
+        },
+        {
+          "type": "pipe",
+          "cmd": {
+            "cmd": "node",
+            "args": []
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -5,14 +5,14 @@ var hackfile = function(src) {
   var p = new nearley.Parser(grammar.ParserRules, grammar.ParserStart);
 
 
-  p.feed(src);
+  p.feed(src + '\n\n');
   var trees = p.results;
-  if (trees.length > 1) console.log("WARNING: multiple trees generated. Please raise an issue.")
+  if (trees.length > 1) console.log("WARNING: ambiguous parse.")
 
   var tree = trees[0];
 
+  if (!tree) throw Error("Could not parse");
   // hoist the imports, and remove them
-  var old_stmts = tree.stmts;
   tree.imports = {};
   tree.statements = [];
 

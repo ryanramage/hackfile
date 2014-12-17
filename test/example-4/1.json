@@ -1,0 +1,25 @@
+fetch
+  run reads
+
+reads
+  run bionode
+  pipe dat reads
+
+samples
+  pipe tool-stream extractProperty expxml.Biosample.id
+  pipe tool-stream unique
+  pipe 10 bionode ncbi search biosample
+  pipe dat samples
+
+wrangle
+  run dat cat samples
+  pipe h.attachUIDsFromLevegraph
+  pipe h.attachReadsMetadata
+  pipe h.attachGenomesMetadata
+  pipe h.attachProjectsMetadata
+  pipe h.attachPapersMetadata
+  pipe h.attachTaxonsMetadata
+  pipe h.filterUnusableMetadata
+  pipe h.summarize
+  pipe dat summary
+

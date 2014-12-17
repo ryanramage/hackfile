@@ -20,3 +20,12 @@ tape('parses simple flat file', function(t) {
   t.end()
 })
 
+tape('parses blocks', function(t) {
+
+  var text = read('3/1.ds');
+  var expected = asJson('3/1.json')
+
+  var actual = hackfile(text);
+  t.deepEqual(actual, expected);
+  t.end()
+})

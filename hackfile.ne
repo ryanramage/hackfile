@@ -1,14 +1,23 @@
-hackfile -> _ stmts _ {% function (d) {return { stmts: d[1] } } %}
+hackfile -> _ root_stmts _ {% function (d) {return { stmts: d[1] } } %}
 
-stmts ->
-    stmt  EOS      {% function(d){ return d[0] } %}
-  | stmt _ stmts   {% function(d){ return _.flatten([d[0],d[2]]) } %}
+root_stmts ->
+    root_stmt EOL          {% function(d){
+                              if (_.isArray(d[0])) return d[0];
+                              return [d[0]];
+                            }%}
+  | root_stmt _ root_stmts {% function(d){ return _.flatten([d[0],d[2]]) } %}
+
+root_stmt ->
+    import  {% id %}
+  | env     {% id %}
+  | block   {% id %}
+  | stmt    {% id %}
+
+
 
 
 stmt ->
-    import  {% id %}
-  | env     {% id %}
-  | run     {% id %}
+    run     {% id %}
   | pipe    {% id %}
 
 import -> "import" SPACE Path SPACE "as" SPACE Identifier {% function(d){ return { type: 'import', path: d[2],  var: d[6] }  }%}
@@ -32,6 +41,13 @@ run ->
 pipe ->
     "pipe" SPACE  Number SPACE cmd {% function(d){ return {type: 'pipe', cmd: d[4], width: d[2]  }} %}
   | "pipe" SPACE cmd               {% function(d){ return {type: 'pipe', cmd: d[2]               }} %}
+
+
+block -> Identifier newline block_cmds newline {% function(d){return { type: 'block', name: d[0], stmts: d[2] }  } %}
+
+block_cmds ->
+        SPACE stmt newline {% function(d){ return d[1] } %}
+      | SPACE stmt newline block_cmds  {% function(d){ return _.flatten([d[1],d[3]]) } %}
 
 cmd ->
     Shell_Atom {% function(d) { return {cmd: d[0], args: []}  } %}
@@ -60,9 +76,12 @@ Identifier  ->  [a-zA-Z_$] [a-zA-Z0-9_$]:* {% function(d){ return d[0] + d[1].jo
 
 Shell_Atom -> [\S]:+ {% function(d) {   return d[0].join('') } %}
 
-EOS ->
+EOL ->
     newline
   | null
+
+TAB ->
+  [\t]:+
 
 #Whitespace
 _ -> null {% function() {} %}
